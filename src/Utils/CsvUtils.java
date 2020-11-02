@@ -14,9 +14,8 @@ public class CsvUtils
     /**
      * This method will parse the given csv file and insert the data into database
      * @param csvFile file name pointing to the csvFile from the data is to be taken
-     * @param sqlHelper SqlHelper class instance
      */
-    public static void parseAndInsertFromCSV(String csvFile, SqlHelper sqlHelper)
+    public static void parseAndInsertFromCSV(String csvFile)
     {
         String line;
 
@@ -35,7 +34,7 @@ public class CsvUtils
                 double percentage = NumberUtils.parsePercentage(csvColumn[6]);
 
                 BtcData btcData = new BtcData(date, price, volume, percentage);
-                sqlHelper.insertData(btcData);
+                SqlHelper.insertData(btcData);
 /*
                 System.out.print(csvColumn[0]);
                 System.out.print("\t\t");
