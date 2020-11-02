@@ -36,7 +36,7 @@ public class SqlHelper
     {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/", user, password); Statement statement = conn.createStatement())
         {
-            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS btc_data");
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS sql3373942");
         } catch (SQLException e)
         {
             e.printStackTrace();
