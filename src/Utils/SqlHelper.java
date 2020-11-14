@@ -10,15 +10,15 @@ import java.util.List;
 public class SqlHelper
 {
     //the user name and password used for sql
-    private static String user = "sql3373942";
-    private static String password = "rNMKw7TBqk";
+    private static String user = "root";
+    private static String password = "";
 
     /**
      * This method will create table
      */
     public static void createTable()
     {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password); Statement statement = conn.createStatement())
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password); Statement statement = conn.createStatement())
         {
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `btc_historical_daily` (`id` SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT, `date` DATE NOT NULL , `price` DECIMAL(10,2) NOT NULL , `volume` INT NOT NULL , `change_percentage` DECIMAL(5,2) NOT NULL )");
         } catch (SQLException e)
@@ -34,7 +34,7 @@ public class SqlHelper
      */
     public static void createDatabase() throws SQLException
     {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/", user, password); Statement statement = conn.createStatement())
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", user, password); Statement statement = conn.createStatement())
         {
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS sql3373942");
         } catch (SQLException e)
@@ -54,7 +54,7 @@ public class SqlHelper
         int BtcId = -1;
         SimpleDateFormat simpleDateFormatWrite = new SimpleDateFormat("yyyy-mm-dd");
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password))
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password))
         {
             String sql = "INSERT INTO `btc_historical_daily` (`date`, `price`, `volume`, `change_percentage`) VALUES (?, ?, ?, ?)";
 
@@ -92,7 +92,7 @@ public class SqlHelper
     public static int countRows()
     {
         int count = 0;
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password))
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password))
         {
             String sql = "SELECT COUNT(*) FROM btc_historical_daily";
             try (PreparedStatement ps = conn.prepareStatement(sql))
@@ -117,7 +117,7 @@ public class SqlHelper
     {
         List<BtcData> btcDataList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password))
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password))
         {
             String sql = "SELECT * FROM btc_historical_daily ORDER BY date";
 
@@ -154,7 +154,7 @@ public class SqlHelper
     {
         List<BtcData> btcDataList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password))
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password))
         {
             String sql = "SELECT id, date, MAX(price), MAX(volume), MAX(change_percentage) FROM btc_historical_daily GROUP BY YEAR(date), MONTH(date) ORDER BY  YEAR(date), MONTH(date)";
 
@@ -192,7 +192,7 @@ public class SqlHelper
     {
         List<BtcData> btcDataList = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3373942", user, password))
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql3373942", user, password))
         {
             String sql = "SELECT id, date, MAX(price), MAX(volume), MAX(change_percentage) FROM btc_historical_daily GROUP BY YEAR(date) ORDER BY  YEAR(date)";
 
